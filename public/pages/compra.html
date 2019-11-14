@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="compiler/bootstrap.css">
+    <link rel="stylesheet" href="../compiler/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link rel="stylesheet" href="compiler/styles.css">
+    <link rel="stylesheet" href="../compiler/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
-    <link rel="stylesheet" href="social-login.css">
-    <link rel="icon" href="imgs/iconePizza.png" type="image/gif"> 
+    <link rel="stylesheet" href="../social-login.css">
+    <link rel="icon" href="../imgs/iconePizza.png" type="image/gif"> 
     <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
 
     
@@ -22,13 +22,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>  
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
-    <script src="firebase.js"></script>
+    <script src="../scripts/firebase.js"></script>
       
-    <script src="Login.js"></script>
-    <script src="Produto_service.js"></script>
-    <script src="models/Produto.js"></script>
-    <script src="DataOp.js"></script>
-    <script src="models/Pizzas.js"></script>
+    <script src="../scripts/Login.js"></script>
+    <script src="../services/Produto_service.js"></script>
+    <script src="../models/Produto.js"></script>
+    <script src="../services/DataOp.js"></script>
+    <script src="../models/Pizzas.js"></script>
     
 
       
@@ -73,7 +73,7 @@
                               <div class="dropdown">
                                   <li class="nav-item">
 
-                                          <img src="imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
+                                          <img src="../imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
                                           <div class="dropdown-menu dropdown-menu-right" aria-laballedby="dropdownPerfil">
                                               <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModal" id="btnMenuLogin" disabled>Fazer Login</a>
                                               <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModalCadastrar" id="btnMenuCadastro">Cadastrar-se</a>
@@ -92,7 +92,7 @@
                   </div>
               </nav>
                 <div class="botaoFlutuante border border-light border-right-0" data-toggle="modal" data-target="#modalCarrinho">
-              <img src="imgs/carrinho.png" class="carrinhoFlutuante" >
+              <img src="../imgs/carrinho.png" class="carrinhoFlutuante" >
 
           </div>
        <div class="container-fluid m-0 p-0 justify-content-center">
@@ -139,7 +139,7 @@
                         <div class="container mx-auto fontTexto">
                                 Escolha sua bebida
                                 <div class=" mesmo-tamanho mx-auto">
-                                    <img src="imgs/glass.png" id="btnAdd"  style=" cursor: pointer;" class="img-fluid  dropdown-toggle dropdown'''''''''  " data-toggle="dropdown"/>
+                                    <img src="../imgs/glass.png" id="btnAdd"  style=" cursor: pointer;" class="img-fluid  dropdown-toggle dropdown'''''''''  " data-toggle="dropdown"/>
                                     
                                         
 
@@ -171,7 +171,7 @@
                             <div class="container mx-auto fontTexto">
                                 Adicione alguma Especificação
                                 <div class=" mesmo-tamanho mx-auto">
-                                    <img src="imgs/plus.png"  style=" cursor: pointer;" onclick="colocarModalTirar()"  data-toggle="modal" data-target="#modalEspecificacoes" class="img-fluid"/>
+                                    <img src="../imgs/plus.png"  style=" cursor: pointer;" onclick="colocarModalTirar()"  data-toggle="modal" data-target="#modalEspecificacoes" class="img-fluid"/>
                                 </div>
                             </div>    
                             
@@ -284,9 +284,9 @@
 
                                   <div class="col-sm-4">
 
-                                      <img src="imgs/iconeInstagram.png" width="50px" height="50px">
+                                      <img src="../imgs/iconeInstagram.png" width="50px" height="50px">
 
-                                      <a class="" href="https://www.facebook.com/pages/Pizzaria-Beleza-Pura/521097314912516?__tn__=HH-R&eid=ARANHActo3KJFjlsU-B4O60BgxdNJF2zTj1fZFQ7JXU9CFOBbp8cN2H6RBuKwKzxVz8H_DSgk83M-L4Y&__xts__[0]=68.ARBNFX_sF0YN4XStkhS2STGlhP5R4gQ-DfUnMO0t_MTefSdWtWn_HMcqvmvRPIdnKhwSqPXOdNACu0qJ7ChQLfp2VfGA_vdwo1ubo0tTURRNCW3orB36P3bAfYAbAVCmNqc3oKLalSiWAc_t9JDO7CQGyzEeinRYfO_b3D1kzqOU4vrAw_70di-Y86u-HarFqakJn61qHBRhu_TiaPvY3Tj1vuw6oil9KnHRB1w4lPGxZMQYFk3TCA6VrsPV_yOeHDWMXNudcGiLvMJkuRbYtdC0q1woIJjU" target="_blank"><img src="imgs/iconeFacebook.png" width="50px" height="50px"></a>
+                                      <a class="" href="https://www.facebook.com/pages/Pizzaria-Beleza-Pura/521097314912516?__tn__=HH-R&eid=ARANHActo3KJFjlsU-B4O60BgxdNJF2zTj1fZFQ7JXU9CFOBbp8cN2H6RBuKwKzxVz8H_DSgk83M-L4Y&__xts__[0]=68.ARBNFX_sF0YN4XStkhS2STGlhP5R4gQ-DfUnMO0t_MTefSdWtWn_HMcqvmvRPIdnKhwSqPXOdNACu0qJ7ChQLfp2VfGA_vdwo1ubo0tTURRNCW3orB36P3bAfYAbAVCmNqc3oKLalSiWAc_t9JDO7CQGyzEeinRYfO_b3D1kzqOU4vrAw_70di-Y86u-HarFqakJn61qHBRhu_TiaPvY3Tj1vuw6oil9KnHRB1w4lPGxZMQYFk3TCA6VrsPV_yOeHDWMXNudcGiLvMJkuRbYtdC0q1woIJjU" target="_blank"><img src="../imgs/iconeFacebook.png" width="50px" height="50px"></a>
                                     </div>
                                 </div>
                             </div>
@@ -400,7 +400,7 @@
                             <div class="input-group">
                                 <input type="password" id="txtSenhaCadastrar" class="form-control border-right-0">
                                 <div class="input-group-append ">
-                                    <div class="btn btn-outline-secondary form-control border border-dark "><img src="imgs/mostrarSenha.png" id="showPassword" value="show" height="25px"/></div>
+                                    <div class="btn btn-outline-secondary form-control border border-dark "><img src="../imgs/mostrarSenha.png" id="showPassword" value="show" height="25px"/></div>
                                     
                                 </div>
                             </div>
@@ -946,10 +946,10 @@
         </script>
       
     
-    <script src="dist/jqueryjs/jquery.js"></script>
+    <script src="../dist/jqueryjs/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="dist/popperjs/popper.js"></script>
-    <script src="dist/bootstrapjs/bootstrap.js"></script>
+    <script src="../dist/popperjs/popper.js"></script>
+    <script src="../dist/bootstrapjs/bootstrap.js"></script>
   </body>
     
 </html>

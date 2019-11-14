@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="compiler/bootstrap.css">
+    <link rel="stylesheet" href="../compiler/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link rel="stylesheet" href="compiler/styles.css">
+    <link rel="stylesheet" href="../compiler/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
-    <link rel="stylesheet" href="social-login.css">
-    <link rel="icon" href="imgs/iconePizza.png" type="image/gif"> 
+    <link rel="stylesheet" href="../social-login.css">
+    <link rel="icon" href="../imgs/iconePizza.png" type="image/gif"> 
     <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
 
     
@@ -22,13 +22,15 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>  
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
-    <script src="firebase.js"></script>
+    <script src="../scripts/firebase.js"></script>
       
-    <script src="Login.js"></script>
-    <script src="Produto.js"></script>
-    <script src="Produto_service.js"></script>
-    <script src="FinalizarCompra.js"></script>
-    <script src="pizza_model.js"></script>
+    <script src="../scripts/Login.js"></script>
+    <script src="../scripts/Produto.js"></script>
+    <script src="../scripts/Produto_service.js"></script>
+    <script src="../models/Pizzas.js"></script>
+    <script src="../services/DataOp.js"></script>
+
+
 
       
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyAxUeOKkUigYadZ07KCQuBQLybgzE0foxc"async defer></script>
@@ -72,7 +74,7 @@
                               <div class="dropdown">
                                   <li class="nav-item">
 
-                                          <img src="imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
+                                          <img src="../imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
                                           <div class="dropdown-menu dropdown-menu-right" aria-laballedby="dropdownPerfil">
                                               <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModal" id="btnMenuLogin" disabled>Fazer Login</a>
                                               <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModalCadastrar" id="btnMenuCadastro">Cadastrar-se</a>
@@ -91,7 +93,7 @@
                   </div>
               </nav>
                 <div class="botaoFlutuante border border-light border-right-0" data-toggle="modal" data-target="#modalCarrinho">
-              <img src="imgs/carrinho.png" class="carrinhoFlutuante" >
+              <img src="../imgs/carrinho.png" class="carrinhoFlutuante" >
 
           </div>
           <div class="card" style="margin-top: 85px !important;">
@@ -147,7 +149,7 @@
                         <div class="form-group row">
                             <label for="inputTipo" class="col-sm-2 col-form-label fontTexto">Tipo:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputIngredientes" placeholder="tipo">
+                                <input type="text" class="form-control" id="inputIngredientesProcurar" placeholder="tipo">
                             </div>
                         </div>
                       </form>
@@ -179,7 +181,7 @@
                       <div class="form-group row">
                         <label for="inputIngredientes" class="col-sm-2 col-form-label fontTexto">ingredientes:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputIngredientesAdicionar" placeholder="use ',' para separar os ingredientes">
+                          <input type="text" class="form-control" id="inputIngredientes" placeholder="use ',' para separar os ingredientes">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -212,29 +214,66 @@
               
             </div>
           </div>
+          <div class="modal fade" id="divModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font" id="exampleModalLabel">Fazer login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="caixa-email" class="col-form-label font">Email:</label>
+                                <input type="email" id="txtEmail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="caixa-senha" class="col-form-label font">Senha:</label>
+                                <input type="password" id="txtSenha" class="form-control">
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer font">
+                        <a href="#" class="mr-auto text-danger" data-toggle="modal" data-target="#divModalCadastrar" data-dismiss="modal">Cadastrar-se</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="btnLogin" class="btn btn-danger">Entrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
       
 
       
     <script>
-        var pizza = new Pizza();
+        
         var path = '';
-        console.log(pizza)
+
         function setProductType(value){
             if(value != null){
                 var drop = document.getElementById("btnType");
                 switch(value){
                     case(1):
                         drop.innerHTML = "Pizza"
+                        path = "pizzas";
+                        restoreForm();
                     return;
                     case(2):
                         drop.innerHTML = "Esfiha"
+                        path = "esfihas";
+                        restoreForm();
                     return;
                     case(3):
                         drop.innerHTML = "Batata"
-                        
+                        path = "batatas";
+                        restoreForm();
                     return;
                     case(4):
                         drop.innerHTML = "Fogazza"
+                        path = "fogazza";
+                        restoreForm();
                     return;
                     case(5):
                         drop.innerHTML = "Bebida"
@@ -246,25 +285,64 @@
         }
         //desativar campos que não servem pra bebida
         function ChangeFormBebida(){
-            document.getElementById("inputIngredientesAdicionar").disabled = true;
+            document.getElementById("inputIngredientes").disabled = true;
             document.getElementById("radioSalgada").disabled = true;
             document.getElementById("radioDoce").disabled = true;
-            var card=['<div class="form-group row"><label for="inputTamanho" class="col-sm-2 col-form-label fontTexto">Tamanho:</label><div class="col-sm-10"><input type="text" class="form-control" id="inputTamanho" placeholder="tamanho da bebida  "></div></div>'];
+            var card=['<div class="form-group row" id="bebidaForm"><label for="inputTamanho" class="col-sm-2 col-form-label fontTexto">Tamanho:</label><div class="col-sm-10"><input type="text" class="form-control" id="inputBebidaTamanho" placeholder="tamanho da bebida  "></div></div>'];
             document.getElementById("formAdicionar").innerHTML += card;
+        }
+        function restoreForm(){
+            document.getElementById("inputIngredientes").disabled = false;
+            document.getElementById("radioSalgada").disabled = false;
+            document.getElementById("radioDoce").disabled = false;
+            var formBebida = document.getElementById("bebidaForm");
+            if(formBebida){
+                formBebida.style.display = "none";
+            }
         }
         function getAllInputData(){
             var nome = document.getElementById("inputNome").value;
-            if(path != "bebidas"){
+            var valor = document.getElementById("inputValor").value;
+            if(path){
+                if(path != "bebidas"){
                 var ingredientes = document.getElementById("inputIngredientes").value;
                 if(document.querySelector('input[name = tipo]:checked') != null){
-                     var tipo = document.querySelector('input[name = tipo]:checked').value;
-                     alert(tipo);
+                    if(nome){
+                        if(ingredientes){
+                            var tipo = document.querySelector('input[name = tipo]:checked').value;
+                            var obj = {'nome':nome,'valor':valor,'ingredientes':ingredientes,'tipo':tipo};
+                            alert(path);
+                            sendToFirebase( path,obj);
+                            console.log(obj);
+                        }else{
+                            alert("insira os ingredientes")
+                        }
+                        
+                    }else{
+                        alert("insira um nome")
+                    }
+                     
                 }else{
                     alert("por favor selecione um tipo");
                 }
+            }else if(path == "bebidas"){
+                
+                var tamanho_bebidas = document.getElementById("inputBebidaTamanho").value;
+                var obj = {'nome' : nome,'valor': valor,'tamanho': tamanho_bebidas};
+                console.log(obj);
+                alert(tamanho_bebidas);
             }
-            var valor = document.getElementById("inputValor").value;
-            alert(valor)
+        }else{
+            alert("escolha um produto");
+        }
+            
+            
+        }
+        function sendToFirebase(url,obj){
+            if(obj){
+                var sender = new DataOp();
+                sender.set(url + "/" + obj.nome,obj);
+            }
         }
         function logout(){
             
@@ -350,10 +428,10 @@
         }());
         
     </script>
-    <script src="dist/jqueryjs/jquery.js"></script>
+    <script src="../dist/jqueryjs/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="dist/popperjs/popper.js"></script>
-    <script src="dist/bootstrapjs/bootstrap.js"></script>
+    <script src="../dist/popperjs/popper.js"></script>
+    <script src="../dist/bootstrapjs/bootstrap.js"></script>
   </body>
     
 </html>
