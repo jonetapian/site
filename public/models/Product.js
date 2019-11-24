@@ -3,7 +3,6 @@ class Product{
     
     constructor(data){
         this.nome;
-        this.id;
         this.qtdCompras = 0;
         if(data){
             this.setProduct(data);

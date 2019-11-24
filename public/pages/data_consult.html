@@ -27,7 +27,8 @@
     <script src="../scripts/Login.js"></script>
     <script src="../scripts/Produto.js"></script>
     <script src="../scripts/Produto_service.js"></script>
-    <script src="../models/Pizzas.js"></script>
+    <script src="../pizzas/pizzas_model.js"></script>
+    <script src="../pizzas/pizzas_service.js"></script>
     <script src="../services/DataOp.js"></script>
 
 
@@ -114,44 +115,54 @@
                   </div>
                   <form class="p-2">
                         <div class="form-group row">
-                                <div class="dropdown col-sm ">
-                                        <button class=" float-right btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          produto
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Pizza</a>
-                                          <a class="dropdown-item" href="#">Esfiha</a>
-                                          <a class="dropdown-item" href="#">Batata</a>
-                                          <a class="dropdown-item" href="#">Fogazza</a>
-                                          <a class="dropdown-item" href="#">Bebida</a>
-                                        </div>
-                                </div>
-                            
-                                <div class="dropdown col-sm">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Item
+                            <div class="dropdown col-auto ">
+                                    <button class=" float-right btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        produto
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" disabled>
-                                      <a class="dropdown-item" href="#">Pizza</a>
-                                      <a class="dropdown-item" href="#">Esfiha</a>
-                                      <a class="dropdown-item" href="#">Batata</a>
-                                      <a class="dropdown-item" href="#">Fogazza</a>
-                                      <a class="dropdown-item" href="#">Bebida</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" onclick="setProductType(1)">Pizza</a>
+                                        <a class="dropdown-item" onclick="setProductType(2)">Esfiha</a>
+                                        <a class="dropdown-item" onclick="setProductType(3)">Batata</a>
+                                        <a class="dropdown-item" onclick="setProductType(4)">Fogazza</a>
+                                        <a class="dropdown-item" onclick="setProductType(5)">Bebida</a>
                                     </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                          <label for="inputIngredientes" class="col-sm-2 col-form-label fontTexto">ingredientes:</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputIngredientesModificar" placeholder="use ',' para separar os ingredientes">
-                          </div>
+                                <div class="col" id="searchColumn" >
+                                        <input type="text" class="form-control" id="searchBar"  placeholder="pesquise seu produto">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="button" class="btn btn-danger form-control" value="Pesquisar" onclick="searchProduct()">
+                                </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputTipo" class="col-sm-2 col-form-label fontTexto">Tipo:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputIngredientesProcurar" placeholder="tipo">
+                        <div class="form-group-row">
+                            <div class="list-group " id="ItemList">
+                                <div class="row">
+                                    <div class="col" id="itemList1">
+                                    </div>
+                                    <div class="col" id="itemList2">
+                                    </div>
+                                    <div class="col" id="itemList3">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div  id="formMod" hidden>
+                            <div class="form-group row" >
+                                <label for="inputIngredientes" class="col-sm-2 col-form-label fontTexto">ingredientes:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="inputIngredientesModificar" placeholder="use ',' para separar os ingredientes">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label for="inputTipo" class="col-sm-2 col-form-label fontTexto">Tipo:</label>
+                                  <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="inputIngredientesProcurar" placeholder="tipo">
+                                  </div>
+                              </div>
+                        </div>
+                        
                       </form>
                   
               <div class="row">
@@ -167,11 +178,11 @@
                                         produto
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item"  onclick="setProductType(1)" >Pizza</a>
-                                        <a class="dropdown-item"  onclick="setProductType(2)" >Esfiha</a>
-                                        <a class="dropdown-item"  onclick="setProductType(3)" >Batata</a>
-                                        <a class="dropdown-item"  onclick="setProductType(4)">Fogazza</a>
-                                        <a class="dropdown-item"  onclick="setProductType(5)" >Bebida</a>
+                                        <a class="dropdown-item"  onclick="setProductType(1,true)" >Pizza</a>
+                                        <a class="dropdown-item"  onclick="setProductType(2,true)" >Esfiha</a>
+                                        <a class="dropdown-item"  onclick="setProductType(3,true)" >Batata</a>
+                                        <a class="dropdown-item"  onclick="setProductType(4,true)">Fogazza</a>
+                                        <a class="dropdown-item"  onclick="setProductType(5,true)" >Bebida</a>
                                       </div>
                                     </div>
                         <div class="col-sm-10">
@@ -187,7 +198,7 @@
                       <div class="form-group row">
                               <label for="inputTipo" class="col-sm-2 col-form-label fontTexto">Tipo:</label>
                               <div class="col-sm-10">
-                                <label class=" fontTexto">Salgada</label>  <input type="radio" id="radioSalgada" name="tipo" class=" " value="Salgada" checked>
+                                <label class=" fontTexto">Salgada</label>  <input type="radio" id="radioSalgada" name="tipo" class=" " value="Salgado" checked>
                                   <label class="fontTexto ml-3" >Doce </label> <input type="radio" class="" id="radioDoce" name="tipo" value="Doce">
                               </div>
                             </div>
@@ -244,41 +255,123 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="divModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title font" id="exampleModalLabel">Editar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-2">
+                                        <label class="font" for="inputNomeModal">Nome:</label>
+                                    </div>
+                                  <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputNomeModal">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="inputIngredientes" class="col-sm-2 col-form-label fontTexto">ingredientes:</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputIngredientesModal" >
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label for="inputTipo" class="col-sm-2 col-form-label fontTexto">Tipo:</label>
+                                        <div class="col-sm-10">
+                                          <label class=" fontTexto">Salgada</label>  <input type="radio" id="radioSalgadaModal" name="tipoModal" class=" " value="Salgado">
+                                            <label class="fontTexto ml-3" >Doce </label> <input type="radio" class="" id="radioDoceModal" name="tipoModal" value="Doce">
+                                        </div>
+                                      </div>
+          
+                                <div class="form-group row">
+                                    <label for="inputValorModal" class="col-sm-2 col-form-label fontTexto">Valor:</label>
+                                    <div class="col-sm-10">
+                                      <input type="number" class="form-control" id="inputValorModal">
+          
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <button type="button" style="width: 100%;" class="btn btn-warning" data-dismiss="modal" onclick="deleteProduct()">Excluir</button>
+                                    </div>
+                                        <div class="col">
+                                            <button type="button"style="width: 100%;" class="btn btn-danger" onclick="updateProduct()" data-dismiss="modal">Salvar alterações</button>
+                                        </div>
+                                        
+                                    </div>
+                              </div>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
       
 
       
     <script>
-        
         var path = '';
+        var selected_product = new Array();
 
-        function setProductType(value){
-            if(value != null){
+        function setProductType(value,from_add){
+            if(value){
                 var drop = document.getElementById("btnType");
                 switch(value){
                     case(1):
-                        drop.innerHTML = "Pizza"
+                        
                         path = "pizzas";
-                        restoreForm();
+                        if(from_add){
+                            drop.innerHTML = "Pizza";
+                            restoreForm();
+                        }else{
+                            fillOptions("pizzas");
+                        }
+                        
                     return;
                     case(2):
-                        drop.innerHTML = "Esfiha"
+                        
                         path = "esfihas";
-                        restoreForm();
+                        if(from_add){
+                            drop.innerHTML = "Esfiha";
+                            restoreForm();
+                        }else{
+                            fillOptions("esfihas");
+                        }
                     return;
                     case(3):
-                        drop.innerHTML = "Batata"
+                        
                         path = "batatas";
-                        restoreForm();
+                        if(from_add){
+                            drop.innerHTML = "Batata";
+                            restoreForm();
+                        }else{
+                            fillOptions("batatas");
+                        }
                     return;
                     case(4):
-                        drop.innerHTML = "Fogazza"
+                        
                         path = "fogazza";
-                        restoreForm();
+                        if(from_add){
+                            drop.innerHTML = "Fogazza";
+                            restoreForm();
+                        }else{
+                            fillOptions("fogazza");
+                        }
                     return;
                     case(5):
-                        drop.innerHTML = "Bebida"
+                        
                         path = "bebidas";
-                        ChangeFormBebida();
+                        if(from_add){
+                            drop.innerHTML = "Bebida";
+                            ChangeFormBebida();
+                        }else{
+                            fillOptions("bebidas");
+                        }
+                        
                     return;
                 }
             }
@@ -310,7 +403,7 @@
                     if(nome){
                         if(ingredientes){
                             var tipo = document.querySelector('input[name = tipo]:checked').value;
-                            var obj = {'nome':nome,'valor':valor,'ingredientes':ingredientes,'tipo':tipo};
+                            var obj = {'nome':nome,'valor':valor,'detalhes':ingredientes,'tipo':tipo};
                             alert(path);
                             sendToFirebase( path,obj);
                             console.log(obj);
@@ -341,9 +434,125 @@
         function sendToFirebase(url,obj){
             if(obj){
                 var sender = new DataOp();
-                sender.set(url + "/" + obj.nome,obj);
+                DataOp.set(url + "/" + obj.nome,obj);
             }
         }
+        function object_to_array(obj){
+            const keys = Object.keys(obj)
+            let array = new Array();
+                for (const key of keys) {
+                  array.push(obj[key]);
+                }
+            return array
+        }
+        function empty_columns(){
+            document.getElementById('itemList1').innerHTML='';
+            document.getElementById('itemList2').innerHTML='';
+            document.getElementById('itemList3').innerHTML='';
+        }
+        function fillOptions(path){
+            var get = new DataOp();
+            const check_is_first = document.getElementById('itemList1').innerHTML;
+            if(check_is_first !== ''){
+                empty_columns();    
+            }
+
+            DataOp.get(path + "/").then(val =>{
+
+                selected_product = object_to_array(val);
+                fillProductColumns(selected_product);
+            });
+
+        }
+        function fillProductColumns(array_products){
+            var itens_column_1 = [];
+            var itens_column_2 = [];
+            var itens_column_3 = [];
+            let tamanho_array = array_products.length;
+            var counter = 0;
+            let divid =  Math.floor(tamanho_array /3)    
+            for(let pizza of array_products){
+
+            if(counter < divid){
+                if(pizza){
+                itens_column_1 += ['<button type="button" id="btn'+ pizza.nome +'" value="'+ pizza.nome +'" onclick="fillModal(this.value)" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#divModalEdit" >'+ pizza.nome+'</button>'];
+                
+                }
+            }else if(counter < divid *2){
+                if(pizza){
+                itens_column_2 += ['<button type="button" id="btn'+ pizza.nome +'" value="'+ pizza.nome +'" onclick="fillModal(this.value)" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#divModalEdit" onclick="fillModal">'+ pizza.nome+'</button>'];
+                
+                }
+            }
+            else{
+                if(pizza){
+                itens_column_3 += ['<button type="button" id="btn'+ pizza.nome +'" value="'+ pizza.nome +'" onclick="fillModal(this.value)" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#divModalEdit" onclick="fillModal">'+ pizza.nome+'</button>'];
+                }
+            }
+
+            counter +=1;
+            }
+            document.getElementById('itemList1').innerHTML += itens_column_1;
+            document.getElementById('itemList2').innerHTML += itens_column_2;
+            document.getElementById('itemList3').innerHTML += itens_column_3;
+        }
+        function searchProduct(){
+            empty_columns();
+            var search = document.getElementById('searchBar').value;
+            search = search.charAt(0).toUpperCase() + search.slice(1);
+            console.log(search);
+            let new_array = new Array();
+            for(let product of selected_product){
+                if(product.nome){
+                    if(product.nome.startsWith(search)){
+                        new_array.push(product);
+                    }
+                }
+            }
+            empty_columns();
+            fillProductColumns(new_array);
+        }
+        function fillModal(value){
+            console.log(selected_product);
+            const editProduct = selected_product.find(product => product.nome === value);
+            console.log(editProduct);
+            document.getElementById('inputNomeModal').value = editProduct.nome;
+            document.getElementById('inputIngredientesModal').value = editProduct.detalhes;
+            //document.getElementById('inputNoModal').value = editProduct.nome;
+            if(editProduct.tipo.toLowerCase() == "salgado"){
+                document.getElementById('radioSalgadaModal').checked = true;
+            }else{
+                document.getElementById('radioDoceModal').checked = true;
+            }
+            document.getElementById('inputValorModal').value = editProduct.valor;
+
+        }
+        function updateProduct(){
+            let nome = document.getElementById('inputNomeModal').value;
+            let ingredientes = document.getElementById('inputIngredientesModal').value;
+            let valor = document.getElementById('inputValorModal').value;
+            let tipo = document.querySelector('input[name = tipoModal]:checked').value;
+            console.log(tipo);
+            var obj = {
+                'nome':nome,
+                'detalhes': ingredientes,
+                'tipo':tipo,
+                'valor':valor
+            };
+            const editProduct = selected_product.findIndex(product => product.nome === obj.nome);
+            selected_product[editProduct] = obj;
+            sendToFirebase(path,obj);
+
+        }
+        function deleteProduct(){
+            let nome = document.getElementById('inputNomeModal').value;
+
+            const editProduct = selected_product.findIndex(product => product.nome === nome);
+
+            document.getElementById('btn' + nome).style.display = 'none';
+            selected_product.pop(editProduct);
+            DataOp.delete(path + "/" + nome );
+        } 
         function logout(){
             
             firebase.auth().signOut().then(function(){

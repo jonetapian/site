@@ -1,5 +1,4 @@
-
-class Pizzas extends Product{
+class Pizza {
     
     constructor(data){
         this.valor_grande;

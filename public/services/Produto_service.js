@@ -1,12 +1,12 @@
 
-class Produto_service{
+class _service extends DataOp{
     
     constructor(){
 
     }
 
-    colocarBanco(){
-        
+    createPizza(obj){
+      this.set("pizzas/",obj);
     }
     updateBanco(obj){
         firebase.database().ref('compras/' + obj.data).set((obj), function(error) {
